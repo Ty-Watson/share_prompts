@@ -18,10 +18,21 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete }) => {
     setTimeout(() => setCopied(""), 3000);
   }
 
+  const handleProfileClick = () => {
+    {/*If user is you, go to your profile page */}
+    if(post.creator._id === session?.user.id) return router.push("/profile");
+    
+    {/*add name query to get the username of the person who posted so it can be dynamicaly displayed in their profile */}
+    router.push(`profile/${post.creator._id}?name=${post.creator.username}`);
+  }
+
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <div 
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+          onClick={handleProfileClick}
+        >
           <Image 
             src={post.creator.image}
             alt="user_image"
@@ -54,7 +65,7 @@ const PromptCard = ({post, handleTagClick, handleEdit, handleDelete }) => {
       text-gray-700">{post.prompt}</p>
       <p 
         className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagCLick(post.tag)}
+        onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
         #{post.tag}
       </p>
