@@ -82,7 +82,7 @@ const Nav = () => {
           <div>
 
             <Image 
-               src="/assets/images/logo.svg"
+               src="/assets/icons/menu.svg"
                width={37}
                height={37}
                className='rounded-full'
